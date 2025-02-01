@@ -1,0 +1,44 @@
+jump game 2--
+class Solution {
+    public int jump(int[] nums) {
+        int near = 0, far = 0, jumps = 0;
+
+        while (far < nums.length - 1) {
+            int farthest = 0;
+            for (int i = near; i <= far; i++) {
+                farthest = Math.max(farthest, i + nums[i]);
+            }
+            near = far + 1;
+            far = farthest;
+            jumps++;
+        }
+
+        return jumps;        
+    }
+}
+//implement queue using stack
+class MyQueue {
+
+    Stack<Integer> input = new Stack();
+    Stack<Integer> output = new Stack();
+    
+    public void push(int x) {
+        input.push(x);
+    }
+
+    public void pop() {
+        peek();
+        output.pop();
+    }
+
+    public int peek() {
+        if (output.empty())
+            while (!input.empty())
+                output.push(input.pop());
+        return output.peek();
+    }
+
+    public boolean empty() {
+        return input.empty() && output.empty();
+    }
+}
